@@ -1,7 +1,17 @@
-import '../styles/globals.css'
+import App from 'next/app';
+import Layout from '../Layout/Layout';
+import 'semantic-ui-css/semantic.min.css';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+class MyApp extends App {
+    render() {
+        const { Component } = this.props;
+
+        return (
+            <Layout>
+                <Component />
+            </Layout>
+        );
+    }
 }
 
-export default MyApp
+export default MyApp;
