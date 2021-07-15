@@ -27,14 +27,16 @@ function Signup() {
 
     const { name, email, password, bio } = user;
 
+    const mediaHandleChange = (e) => {
+        const { files } = e.target
+
+        setMedia(files[0])
+        setMediaPreview(URL.createObjectURL(files[0]));
+
+    }
+
     const handleChange = (e) => {
-        const { name, value, files } = e.target;
-
-        if (name === 'media') {
-            setMedia(files[0]);
-            setMediaPreview(URL.createObjectURL(files[0]));
-        }
-
+        const { name, value } = e.target;
         setUser((prev) => ({ ...prev, [name]: value }));
     };
 
@@ -133,7 +135,7 @@ function Signup() {
                         inputRef={inputRef}
                         highlighted={highlighted}
                         setHighlighted={setHighlighted}
-                        handleChange={handleChange}
+                        handleChange={mediaHandleChange}
                     />
                     <Form.Input
                         required
