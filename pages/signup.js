@@ -28,12 +28,11 @@ function Signup() {
     const { name, email, password, bio } = user;
 
     const mediaHandleChange = (e) => {
-        const { files } = e.target
+        const { files } = e.target;
 
-        setMedia(files[0])
+        setMedia(files[0]);
         setMediaPreview(URL.createObjectURL(files[0]));
-
-    }
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
