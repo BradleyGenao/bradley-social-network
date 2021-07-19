@@ -41,21 +41,18 @@ const newLikeNotification = async (userId, postId, userToNotifyId) => {
 
 const removeLikeNotification = async (userId, postId, userToNotifyId) => {
     try {
-        const user = await NotificationModel.findOne({ user: userToNotifyId });
-
-        const notificationToRemove = await user.notifications.find(
-            (notification) =>
-                notification.type === 'newLike' &&
-                notification.user.toString() === userId &&
-                notification.post.toString() === postId
+        await NotificationModel.findOneAndUpdate(
+            { user: userToNotifyId },
+            {
+                $pull: {
+                    notifications: {
+                        type: 'newLike',
+                        user: userId,
+                        post: postId,
+                    },
+                },
+            }
         );
-
-        const indexOf = user.notifications
-            .map((notification) => notification._id.toString())
-            .indexOf(notificationToRemove._id.toString());
-
-        await user.notifications.splice(indexOf, 1);
-        await user.save();
 
         return;
     } catch (error) {
