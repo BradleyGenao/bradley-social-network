@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Segment, Image, Icon, Header } from 'semantic-ui-react';
+import { useRouter } from 'next/router';
 
 function ImageDropDiv({
     highlighted,
@@ -9,7 +10,39 @@ function ImageDropDiv({
     mediaPreview,
     setMediaPreview,
     setMedia,
+    profilePicUrl,
 }) {
+    const router = useRouter();
+
+    const signupRoute = router.pathname === '/signup';
+
+    const checkForSignupPage = () =>
+        signupRoute ? (
+            <>
+                <Header icon>
+                    <Icon
+                        name="file image outline"
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => inputRef.current.click()}
+                        size="huge"
+                    />
+                    Drag n Drop or Click to upload image
+                </Header>
+            </>
+        ) : (
+            <span style={{ textAlign: 'center' }}>
+                <Image
+                    src={profilePicUrl}
+                    alt="Profile pic"
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => inputRef.current.click()}
+                    size="huge"
+                    centered
+                />
+                Drag n Drop or Click to upload image
+            </span>
+        );
+
     return (
         <>
             <Form.Field>
@@ -48,34 +81,23 @@ function ImageDropDiv({
                         {mediaPreview === null ? (
                             <>
                                 <Segment
-                                    {...(highlighted && { color: 'green' })}
+                                    color={highlighted ? 'green' : ''}
                                     placeholder
                                     basic
                                 >
-                                    <Header icon>
-                                        <Icon
-                                            name="file image outline"
-                                            style={{ cursor: 'pointer' }}
-                                            onClick={() =>
-                                                inputRef.current.click()
-                                            }
-                                        />
-                                        Drag n Drop or Click To Upload Image
-                                    </Header>
+                                    {checkForSignupPage()}
                                 </Segment>
                             </>
                         ) : (
-                            <>
-                                <Segment color="green" placeholder basic>
-                                    <Image
-                                        src={mediaPreview}
-                                        size="medium"
-                                        centered
-                                        style={{ cursor: 'pointer' }}
-                                        onClick={() => inputRef.current.click()}
-                                    />
-                                </Segment>
-                            </>
+                            <Segment color="green" placeholder basic>
+                                <Image
+                                    src={mediaPreview}
+                                    size="medium"
+                                    centered
+                                    style={{ cursor: 'pointer' }}
+                                    onClick={() => inputRef.current.click()}
+                                />
+                            </Segment>
                         )}
                     </div>
                 </Segment>
