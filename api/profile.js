@@ -6,6 +6,10 @@ const PostModel = require('../models/PostModel');
 const FollowerModel = require('../models/FollowerModel');
 const ProfileModel = require('../models/ProfileModel');
 const bcrypt = require('bcryptjs');
+const {
+    newFollowerNotification,
+    removeFollowerNotification,
+} = require('../utilsServer/notificationActions');
 
 // GET PROFILE INFO
 router.get('/:username', authMiddleware, async (req, res) => {
@@ -133,6 +137,8 @@ router.post('/follow/:userToFollowId', authMiddleware, async (req, res) => {
         await userToFollow.followers.unshift({ user: userId });
         await userToFollow.save();
 
+        await newFollowerNotification(userId, userToFollowId);
+
         return res.status(200).send('Updated');
     } catch (error) {
         console.error(error);
@@ -182,6 +188,8 @@ router.put('/unfollow/:userToUnfollowId', authMiddleware, async (req, res) => {
         await userToUnfollow.followers.splice(removeFollower, 1);
         await userToUnfollow.save();
 
+        await removeFollowerNotification(userId, userToUnfollowId);
+
         return res.status(200).send('Updated');
     } catch (error) {
         console.error(error);
@@ -204,7 +212,7 @@ router.post('/update', authMiddleware, async (req, res) => {
         } = req.body;
 
         let profileFields = {};
-        profileFields.user = userId;
+        profileFields.user = user._id;
 
         profileFields.bio = bio;
 
