@@ -65,7 +65,6 @@ function Messages({ chatsData, user }) {
             if (socket.current) {
                 socket.current.emit('disjoin');
                 socket.current.off();
-
             }
         };
     }, []);
@@ -240,12 +239,15 @@ function Messages({ chatsData, user }) {
     return (
         <>
             <Segment padded basic size="large" style={{ marginTop: '5px' }}>
-                <Header
-                    icon="home"
-                    content="Go Back!"
-                    onClick={() => router.push('/')}
-                    style={{ cursor: 'pointer' }}
-                />
+                <a href="/">
+                    <Header
+                        icon="home"
+                        content="Go Back!"
+                        onClick={() => router.push('/')}
+                        style={{ cursor: 'pointer' }}
+                    />
+                </a>
+
                 <Divider hidden />
 
                 <div style={{ marginBottom: '10px' }}>
