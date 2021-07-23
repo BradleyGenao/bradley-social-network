@@ -82,7 +82,7 @@ function ProfilePage({
 
         return () => {
             if (socket.current) {
-                socket.current.emit('disconnect');
+                socket.current.emit('disjoin');
                 socket.current.off();
             }
         };
