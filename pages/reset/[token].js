@@ -55,7 +55,7 @@ function TokenPage() {
           attached
           success
           size="large"
-          header="Password reset successfull"
+          header="Password reset successful"
           icon="check"
           content="Login Again"
           style={{ cursor: "pointer" }}
