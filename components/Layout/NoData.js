@@ -23,7 +23,7 @@ export const NoFollowData = ({ followersComponent, followingComponent }) => (
             <Message
                 icon="user outline"
                 info
-                content="User does not have followers"
+                content={`User does not have followers`}
             />
         )}
 
@@ -31,7 +31,7 @@ export const NoFollowData = ({ followersComponent, followingComponent }) => (
             <Message
                 icon="user outline"
                 info
-                content="User does not follow any users"
+                content={`User does not follow any users`}
             />
         )}
     </>
@@ -57,4 +57,12 @@ export const NoPosts = () => (
 
 export const NoProfile = () => (
     <Message info icon="meh" header="Hey!" content="No Profile Found." />
+);
+
+export const NoNotifications = () => (
+    <Message content="No Notifications" icon="smile" info />
+);
+
+export const NoPostFound = () => (
+    <Message info icon="meh" header="Hey!" content="No Post Found." />
 );
