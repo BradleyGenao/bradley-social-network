@@ -15,7 +15,7 @@ function CommonInputs({
                 name="bio"
                 value={bio}
                 onChange={handleChange}
-                placeholder="bio"
+                placeholder="bio *"
             />
 
             <Button

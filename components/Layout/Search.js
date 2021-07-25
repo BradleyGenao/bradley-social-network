@@ -73,7 +73,7 @@ const ResultRenderer = ({ _id, profilePicUrl, name }) => {
     return (
         <List key={_id}>
             <List.Item>
-                <Image src={profilePicUrl} alt="ProfilePic" avatar />
+                <Image src={profilePicUrl} alt="ProfilePic" avatar size='mini'  />
                 <List.Content header={name} as="a" />
             </List.Item>
         </List>
